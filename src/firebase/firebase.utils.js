@@ -3,13 +3,13 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const config = {
-  apiKey: "AIzaSyB6bVZHcSNoM7yWd7n5s3lR1gDipJYyF3Y",
-  authDomain: "crwn-db-cfcb0.firebaseapp.com",
-  projectId: "crwn-db-cfcb0",
-  storageBucket: "crwn-db-cfcb0.appspot.com",
-  messagingSenderId: "813273469768",
-  appId: "1:813273469768:web:9706cd3ad0c7b1e800197d",
-  measurementId: "G-FGSX7FQEH2",
+  apiKey: "AIzaSyAnJX3PTc9jNHgalw5mJBPjD0SEtvMh-l0",
+  authDomain: "crwn-clothing-cb495.firebaseapp.com",
+  projectId: "crwn-clothing-cb495",
+  storageBucket: "crwn-clothing-cb495.appspot.com",
+  messagingSenderId: "563680654642",
+  appId: "1:563680654642:web:17b6a5be81a04fac68932b",
+  measurementId: "G-WLP93GGHS9",
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -42,6 +42,21 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 };
 
 firebase.initializeApp(config);
+
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
+};
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
